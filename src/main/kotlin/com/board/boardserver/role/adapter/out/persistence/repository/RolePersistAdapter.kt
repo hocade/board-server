@@ -2,7 +2,7 @@ package com.board.boardserver.role.adapter.out.persistence.repository
 
 import com.board.boardserver.role.adapter.out.persistence.entity.RoleType
 import com.board.boardserver.role.adapter.out.persistence.mapper.RoleJpaEntityMapper
-import com.board.boardserver.role.application.port.out.RoleJpaPort
+import com.board.boardserver.role.port.out.RoleJpaPort
 import com.board.boardserver.role.domain.Role
 import org.springframework.stereotype.Component
 

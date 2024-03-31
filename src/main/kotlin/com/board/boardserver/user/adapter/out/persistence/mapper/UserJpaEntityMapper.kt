@@ -1,7 +1,7 @@
 package com.board.boardserver.user.adapter.out.persistence.mapper
 
 import com.board.boardserver.user.adapter.out.persistence.entity.UserJpaEntity
-import com.board.boardserver.user.application.port.`in`.command.UserCommend
+import com.board.boardserver.user.port.`in`.command.UserCommend
 import com.board.boardserver.user.domain.User
 import org.mapstruct.Mapper
 import org.mapstruct.Mapping

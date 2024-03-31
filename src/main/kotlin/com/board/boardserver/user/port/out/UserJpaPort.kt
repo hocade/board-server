@@ -1,6 +1,6 @@
-package com.board.boardserver.user.application.port.out
+package com.board.boardserver.user.port.out
 
-import com.board.boardserver.user.application.port.`in`.command.UserCommend
+import com.board.boardserver.user.port.`in`.command.UserCommend
 import com.board.boardserver.user.domain.User
 
 /**

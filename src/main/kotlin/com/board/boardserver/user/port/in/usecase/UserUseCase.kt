@@ -1,6 +1,6 @@
-package com.board.boardserver.user.application.port.`in`.usecase
+package com.board.boardserver.user.port.`in`.usecase
 
-import com.board.boardserver.user.application.port.`in`.command.UserCommend
+import com.board.boardserver.user.port.`in`.command.UserCommend
 import com.board.boardserver.user.domain.User
 
 /**

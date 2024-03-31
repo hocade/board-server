@@ -1,4 +1,4 @@
-package com.board.boardserver.role.application.port.out
+package com.board.boardserver.role.port.out
 
 import com.board.boardserver.role.adapter.out.persistence.entity.RoleType
 import com.board.boardserver.role.domain.Role

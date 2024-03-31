@@ -13,6 +13,6 @@ data class User(
     val password: String,
     val roles: List<UserRole>? = mutableListOf(),
     val phone: Phone?,
-    val uniqueCode: String?,
+    val uniqueCode: String?
 ) {
 }

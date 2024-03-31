@@ -1,8 +1,8 @@
 package com.board.boardserver.user.adapter.out.persistence.repository
 
 import com.board.boardserver.user.adapter.out.persistence.mapper.UserJpaEntityMapper
-import com.board.boardserver.user.application.port.`in`.command.UserCommend
-import com.board.boardserver.user.application.port.out.UserJpaPort
+import com.board.boardserver.user.port.`in`.command.UserCommend
+import com.board.boardserver.user.port.out.UserJpaPort
 import com.board.boardserver.user.domain.User
 import org.springframework.stereotype.Component
 

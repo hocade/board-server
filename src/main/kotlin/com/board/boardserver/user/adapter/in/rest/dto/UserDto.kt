@@ -7,7 +7,7 @@ import com.board.boardserver.role.adapter.out.persistence.entity.RoleType
  * @since 3/23/24
  */
 sealed class UserDto {
-    data class CreateUser(
+    data class Create(
         val nickName: String,
         val password: String,
         val email: String,

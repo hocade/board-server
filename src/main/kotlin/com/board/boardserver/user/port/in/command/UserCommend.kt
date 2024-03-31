@@ -1,4 +1,4 @@
-package com.board.boardserver.user.application.port.`in`.command
+package com.board.boardserver.user.port.`in`.command
 
 import com.board.boardserver.role.adapter.out.persistence.entity.RoleType
 

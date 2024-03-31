@@ -2,10 +2,10 @@ package com.board.boardserver.user.application.service
 
 import com.board.boardserver.common.exception.CommonException
 import com.board.boardserver.common.exception.enum.CommonExceptionCode
-import com.board.boardserver.role.application.port.out.RoleJpaPort
-import com.board.boardserver.user.application.port.`in`.command.UserCommend
-import com.board.boardserver.user.application.port.`in`.usecase.UserUseCase
-import com.board.boardserver.user.application.port.out.UserJpaPort
+import com.board.boardserver.role.port.out.RoleJpaPort
+import com.board.boardserver.user.port.`in`.command.UserCommend
+import com.board.boardserver.user.port.`in`.usecase.UserUseCase
+import com.board.boardserver.user.port.out.UserJpaPort
 import com.board.boardserver.user.domain.User
 import jakarta.transaction.Transactional
 import org.springframework.stereotype.Service
