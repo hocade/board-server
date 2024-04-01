@@ -10,7 +10,7 @@ spring:
     oauth2:
       resource-server:
         jwt:
-          issuer-uri: http://localhost:9000/oauth2/token
+          issuer-uri: http://localhost:9000
           jwk-set-uri: http://localhost:9000/oauth2/jwks
 
   datasource:
@@ -36,7 +36,9 @@ spring:
 
 logging:
   level:
-    root: DEBUG
+    root: INFO
+    com.board.boardserver: DEBUG
+    org.springframework.security: TRACE
     org:
       hibernate:
         SQL: DEBUG
