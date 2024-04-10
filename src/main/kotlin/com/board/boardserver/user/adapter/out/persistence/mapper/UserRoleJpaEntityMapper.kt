@@ -2,7 +2,7 @@ package com.board.boardserver.user.adapter.out.persistence.mapper
 
 import com.board.boardserver.role.adapter.out.persistence.entity.RoleJpaEntity
 import com.board.boardserver.user.adapter.out.persistence.entity.UserJpaEntity
-import com.board.boardserver.user.adapter.out.persistence.entity.UserRoleId
+import com.board.boardserver.user.adapter.out.persistence.entity.UserRoleJpaEntityId
 import com.board.boardserver.user.adapter.out.persistence.entity.UserRoleJpaEntity
 import com.board.boardserver.user.domain.UserRole
 import org.mapstruct.AfterMapping
@@ -28,11 +28,11 @@ abstract class UserRoleJpaEntityMapper {
 
     @Mapping(target = "userId", source = "id.userId")
     @Mapping(target = "roleId", source = "id.roleId")
-    abstract fun toUserRole(id: UserRoleId): UserRole
+    abstract fun toUserRole(id: UserRoleJpaEntityId): UserRole
 
     @AfterMapping
     fun after(user: UserJpaEntity, role: RoleJpaEntity, @MappingTarget entity: UserRoleJpaEntity) {
-        entity.id = UserRoleId(user.id!!, role.id!!)
+        entity.id = UserRoleJpaEntityId(user.id!!, role.id!!)
     }
 
 }

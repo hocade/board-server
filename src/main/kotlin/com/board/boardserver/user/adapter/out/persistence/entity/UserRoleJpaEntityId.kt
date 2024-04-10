@@ -9,9 +9,9 @@ import java.io.Serializable
  * @since 3/14/24
  */
 @Embeddable
-data class UserRoleId(
+data class UserRoleJpaEntityId(
     @Column(name = "USER_ID")
-    var userId: Long,
+    val userId: Long,
     @Column(name = "ROLE_ID")
-    var roleId: Long
+    val roleId: Long
 ) : Serializable

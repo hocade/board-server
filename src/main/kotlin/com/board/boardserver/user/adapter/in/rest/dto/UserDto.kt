@@ -11,7 +11,7 @@ sealed class UserDto {
         val nickName: String,
         val password: String,
         val email: String,
-        val roleType: RoleType
+        val roleType: RoleType?
     ) : UserDto()
     data class Response(
         val id: Long,

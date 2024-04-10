@@ -15,6 +15,7 @@ import org.springframework.security.web.SecurityFilterChain
 @Configuration
 @EnableWebSecurity
 class SecurityConfig {
+    private val allowedUrls = arrayOf("/user")
 
     @Bean
     @Throws(Exception::class)
@@ -23,7 +24,7 @@ class SecurityConfig {
 //            .csrf().disable()
             .headers { it.frameOptions().sameOrigin() }
             .authorizeHttpRequests {
-                it.requestMatchers("/user/**").permitAll()
+                it.requestMatchers(*allowedUrls).permitAll()
                     .anyRequest().authenticated()
             }
             .oauth2ResourceServer { it.jwt(Customizer.withDefaults()) }
