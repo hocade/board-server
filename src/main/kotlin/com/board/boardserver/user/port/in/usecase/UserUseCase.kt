@@ -8,7 +8,7 @@ import com.board.boardserver.user.domain.User
  * @since 3/23/24
  */
 interface UserUseCase {
-    fun create(commend: UserCommend.CreateUser): User
+    fun create(commend: UserCommend.Request): User
     fun findById(id: Long): User?
     fun findByEmail(email: String): User?
 }

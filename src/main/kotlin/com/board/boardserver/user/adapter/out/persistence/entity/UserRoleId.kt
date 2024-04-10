@@ -11,7 +11,7 @@ import java.io.Serializable
 @Embeddable
 data class UserRoleId(
     @Column(name = "USER_ID")
-    val userId: Long,
+    var userId: Long,
     @Column(name = "ROLE_ID")
-    val roleId: Long
+    var roleId: Long
 ) : Serializable

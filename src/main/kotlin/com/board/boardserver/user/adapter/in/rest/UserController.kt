@@ -36,7 +36,7 @@ class UserController(
 
     @PostMapping
     fun create(@RequestBody dto: UserDto.Create): ResponseEntity<GenericResponse<UserDto.Response>> {
-        val command = UserCommandMapper.instance.toCreateUserCommand(dto)
+        val command = UserCommandMapper.instance.toRequestCommand(dto)
         val user = userUseCase.create(command)
         return GenericResponse.ok(UserResponseDtoMapper.instance.toDto(user))
     }

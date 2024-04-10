@@ -11,8 +11,7 @@ data class User(
     val email: String,
     val nickName: String,
     val password: String,
-    val roles: List<UserRole>? = mutableListOf(),
+    var roles: MutableSet<UserRole> = mutableSetOf(),
     val phone: Phone?,
     val uniqueCode: String?
-) {
-}
+)

@@ -22,8 +22,8 @@ class UserJpaEntity(
     @Column(name = "PASSWORD")
     var password: String,
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user", cascade = [CascadeType.ALL], orphanRemoval = true)
-    var roles: Set<UserRoleJpaEntity>? = mutableSetOf(),
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "user", cascade = [CascadeType.ALL], orphanRemoval = true)
+    var roles: MutableSet<UserRoleJpaEntity> = mutableSetOf(),
 
     @Embedded
     var phone: Phone?,
@@ -32,4 +32,7 @@ class UserJpaEntity(
     var uniqueCode: String?,
 
     ) {
+    fun addRoles(role: UserRoleJpaEntity) {
+        this.roles.add(role)
+    }
 }

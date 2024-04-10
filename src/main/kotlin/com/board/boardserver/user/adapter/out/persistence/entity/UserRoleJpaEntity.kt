@@ -11,16 +11,16 @@ import jakarta.persistence.*
 @Table(name = "USER_ROLES")
 class UserRoleJpaEntity(
     @EmbeddedId
-    val id: UserRoleId,
+    var id: UserRoleId?,
 
     @MapsId("userId")
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "USER_ID")
-    val user: UserJpaEntity,
+    val user: UserJpaEntity?,
 
     @MapsId("roleId")
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ROLE_ID")
-    val role: RoleJpaEntity
+    val role: RoleJpaEntity?
 
 )

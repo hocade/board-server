@@ -1,5 +1,6 @@
 package com.board.boardserver.role.adapter.out.persistence.mapper
 
+import com.board.boardserver.role.adapter.out.persistence.entity.RoleJpaEntity
 import com.board.boardserver.role.domain.Role
 import org.mapstruct.Mapper
 import org.mapstruct.factory.Mappers
@@ -14,5 +15,5 @@ abstract class RoleJpaEntityMapper {
         val instance: RoleJpaEntityMapper = Mappers.getMapper(RoleJpaEntityMapper::class.java)
     }
 
-    abstract fun toRole(roleJpaEntity: Role): Role
+    abstract fun toRole(roleJpaEntity: RoleJpaEntity): Role
 }

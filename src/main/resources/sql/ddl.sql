@@ -4,7 +4,7 @@ create table USER
         primary key,
     EMAIL                 varchar(50) not null,
     NICK_NAME             varchar(50) not null,
-    PASSWORD              varchar(50) not null,
+    PASSWORD              varchar(100) not null,
     PHONE_COUNTRY_CODE    varchar(50) null,
     PHONE_NATIONAL_NUMBER varchar(50) null,
     UNIQUE_CODE           varchar(50) null

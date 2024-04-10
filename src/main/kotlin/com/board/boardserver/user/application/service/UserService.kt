@@ -2,12 +2,12 @@ package com.board.boardserver.user.application.service
 
 import com.board.boardserver.common.exception.CommonException
 import com.board.boardserver.common.exception.enum.CommonExceptionCode
-import com.board.boardserver.role.port.out.RoleJpaPort
 import com.board.boardserver.user.port.`in`.command.UserCommend
 import com.board.boardserver.user.port.`in`.usecase.UserUseCase
 import com.board.boardserver.user.port.out.UserJpaPort
 import com.board.boardserver.user.domain.User
 import jakarta.transaction.Transactional
+import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
 
 /**
@@ -17,16 +17,17 @@ import org.springframework.stereotype.Service
 @Service
 class UserService(
     private val userJpaPort: UserJpaPort,
-    private val roleJpaPort: RoleJpaPort
+    private val passwordEncoder: PasswordEncoder
 ) : UserUseCase {
 
     @Transactional
-    override fun create(commend: UserCommend.CreateUser): User {
-        // todo : 샘플 작성이며 추후 Security 적용 시 password 암호화, role 추가 등 구현 필요
+    override fun create(commend: UserCommend.Request): User {
         if (findByEmail(commend.email) != null) {
             throw CommonException(CommonExceptionCode.USER_ALREADY_EXISTS)
         }
-        return userJpaPort.saveUser(commend)
+        commend.encryptPassword(passwordEncoder.encode(commend.password))
+        val user = userJpaPort.saveUser(commend)
+        return userJpaPort.updateRole(user.id!!, commend.roleType)
     }
 
     override fun findById(id: Long): User? {
