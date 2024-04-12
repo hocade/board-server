@@ -2,10 +2,13 @@ package com.board.boardserver.common.config
 
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
+import org.springframework.http.HttpMethod
 import org.springframework.security.config.Customizer
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
+import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationConverter
+import org.springframework.security.oauth2.server.resource.authentication.JwtGrantedAuthoritiesConverter
 import org.springframework.security.web.SecurityFilterChain
 
 /**
@@ -15,7 +18,7 @@ import org.springframework.security.web.SecurityFilterChain
 @Configuration
 @EnableWebSecurity
 class SecurityConfig {
-    private val allowedUrls = arrayOf("/user")
+    private val allowedUrls = arrayOf("/user/**")
 
     @Bean
     @Throws(Exception::class)
@@ -24,14 +27,34 @@ class SecurityConfig {
 //            .csrf().disable()
             .headers { it.frameOptions().sameOrigin() }
             .authorizeHttpRequests {
-                it.requestMatchers(*allowedUrls).permitAll()
-                    .anyRequest().authenticated()
+                it.requestMatchers(*allowedUrls).hasRole("USER")
+                  .anyRequest().authenticated()
             }
-            .oauth2ResourceServer { it.jwt(Customizer.withDefaults()) }
+            .oauth2ResourceServer {
+                it.jwt { jwtAuthenticationConverter() }
+            }
         return http.build()
     }
 
     @Bean
     fun passwordEncoder() = BCryptPasswordEncoder()
 
+    // JwtAuthenticationConverter 설정
+    @Bean
+    fun jwtAuthenticationConverter(): JwtAuthenticationConverter {
+        val converter = JwtAuthenticationConverter()
+        converter.setJwtGrantedAuthoritiesConverter(jwtGrantedAuthoritiesConverter())
+        return converter
+    }
+
+    // JwtGrantedAuthoritiesConverter 설정
+    @Bean
+    fun jwtGrantedAuthoritiesConverter(): JwtGrantedAuthoritiesConverter {
+        val converter = JwtGrantedAuthoritiesConverter()
+        // 권한 정보가 포함된 claim의 이름 설정(인증서버에서 roles값으로 반환하고 있음)
+        converter.setAuthoritiesClaimName("roles")
+        // role prefix 제거
+        converter.setAuthorityPrefix("")
+        return converter
+    }
 }
