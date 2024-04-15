@@ -42,6 +42,7 @@ dependencies {
     implementation("org.mapstruct:mapstruct:${mapstructVersion}")
     implementation("org.mapstruct:mapstruct-processor:${mapstructVersion}")
     implementation("io.jsonwebtoken:jjwt-api:0.11.5")
+    implementation("org.springframework.boot:spring-boot-starter-data-redis")
 
     annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
     runtimeOnly("io.jsonwebtoken:jjwt-impl:0.11.5")
