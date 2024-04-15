@@ -1,6 +1,5 @@
 package com.board.boardserver.user.domain
 
-import com.board.boardserver.user.adapter.out.persistence.entity.Phone
 
 /**
  * @author jinwook.kim

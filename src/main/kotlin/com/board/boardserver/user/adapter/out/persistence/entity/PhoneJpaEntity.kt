@@ -2,8 +2,6 @@ package com.board.boardserver.user.adapter.out.persistence.entity
 
 import jakarta.persistence.Column
 import jakarta.persistence.Embeddable
-import jakarta.persistence.Entity
-import jakarta.persistence.Table
 import java.io.Serializable
 
 /**
@@ -11,7 +9,7 @@ import java.io.Serializable
  * @since 3/14/24
  */
 @Embeddable
-data class Phone(
+data class PhoneJpaEntity(
     @Column(name = "PHONE_COUNTRY_CODE")
     val countryCode: String,
     @Column(name = "PHONE_NATIONAL_NUMBER")

@@ -1,5 +1,6 @@
 package com.board.boardserver.user.adapter.out.persistence.entity
 
+import com.board.boardserver.common.entity.BaseJpaEntity
 import jakarta.persistence.*
 
 /**
@@ -26,12 +27,11 @@ class UserJpaEntity(
     var roles: MutableSet<UserRoleJpaEntity> = mutableSetOf(),
 
     @Embedded
-    var phone: Phone?,
+    var phone: PhoneJpaEntity?,
 
     @Column(name = "UNIQUE_CODE")
     var uniqueCode: String?,
-
-    ) {
+    ) : BaseJpaEntity() {
     fun addRoles(role: UserRoleJpaEntity) {
         this.roles.add(role)
     }

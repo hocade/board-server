@@ -18,17 +18,17 @@ import org.springframework.security.web.SecurityFilterChain
 @Configuration
 @EnableWebSecurity
 class SecurityConfig {
-    private val allowedUrls = arrayOf("/user/**")
+    private val allowedUrls = arrayOf("/user")
 
     @Bean
     @Throws(Exception::class)
     fun filterChain(http: HttpSecurity): SecurityFilterChain {
         http
-//            .csrf().disable()
+            .csrf().disable()
             .headers { it.frameOptions().sameOrigin() }
             .authorizeHttpRequests {
-                it.requestMatchers(*allowedUrls).hasRole("USER")
-                  .anyRequest().authenticated()
+                it.requestMatchers(*allowedUrls).permitAll()
+                  .anyRequest().hasRole("USER")
             }
             .oauth2ResourceServer {
                 it.jwt { jwtAuthenticationConverter() }
