@@ -2,7 +2,7 @@ package com.board.boardserver.user.adapter.out.persistence.repository
 
 import com.board.boardserver.common.exception.CommonException
 import com.board.boardserver.common.exception.enum.CommonExceptionCode
-import com.board.boardserver.user.adapter.out.persistence.entity.UserAuthenticationRedisEntityType
+import com.board.boardserver.user.adapter.out.persistence.entity.UserAuthenticationType
 import com.board.boardserver.user.adapter.out.persistence.mapper.UserAuthenticationRedisEntityMapper
 import com.board.boardserver.user.domain.UserAuthenticationRedis
 import com.board.boardserver.user.port.out.UserAuthenticationRedisPort
@@ -17,7 +17,7 @@ class UserAuthenticationRedisPersistAdapter(
     private val userAuthenticationRedisRepository: UserAuthenticationRedisRepository
 ) : UserAuthenticationRedisPort {
 
-    override fun save(key: String, value: String, type: UserAuthenticationRedisEntityType): UserAuthenticationRedis {
+    override fun save(key: String, value: String, type: UserAuthenticationType): UserAuthenticationRedis {
         val userAuthenticationRedis = userAuthenticationRedisRepository.save(UserAuthenticationRedisEntityMapper.instance.toEntity(key, value, type.expiration))
         return UserAuthenticationRedisEntityMapper.instance.toDomain(userAuthenticationRedis)
     }

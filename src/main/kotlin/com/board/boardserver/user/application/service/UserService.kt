@@ -2,10 +2,10 @@ package com.board.boardserver.user.application.service
 
 import com.board.boardserver.common.exception.CommonException
 import com.board.boardserver.common.exception.enum.CommonExceptionCode
+import com.board.boardserver.user.domain.User
 import com.board.boardserver.user.port.`in`.command.UserCommend
 import com.board.boardserver.user.port.`in`.usecase.UserUseCase
 import com.board.boardserver.user.port.out.UserJpaPort
-import com.board.boardserver.user.domain.User
 import jakarta.transaction.Transactional
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
@@ -21,7 +21,7 @@ class UserService(
 ) : UserUseCase {
 
     @Transactional
-    override fun create(commend: UserCommend.Request): User {
+    override fun create(commend: UserCommend.Create): User {
         if (findByEmail(commend.email) != null) {
             throw CommonException(CommonExceptionCode.USER_ALREADY_EXISTS)
         }

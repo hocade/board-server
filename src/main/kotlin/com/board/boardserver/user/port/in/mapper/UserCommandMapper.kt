@@ -19,7 +19,7 @@ abstract class UserCommandMapper {
     }
 
     @Mapping(target = "roleType", source = ".", qualifiedByName = ["userRole"])
-    abstract fun toRequestCommand(dto: UserDto.Create): UserCommend.Request
+    abstract fun toRequestCommand(dto: UserDto.Create): UserCommend.Create
 
     /**
      * USER 기본 권한

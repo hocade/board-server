@@ -7,7 +7,7 @@ import com.board.boardserver.role.adapter.out.persistence.entity.RoleType
  * @since 3/23/24
  */
 sealed class UserCommend {
-    data class Request(
+    data class Create(
         val nickName: String,
         var password: String,
         val email: String,

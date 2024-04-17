@@ -7,4 +7,6 @@ package com.board.boardserver.user.domain
 data class UserAuthenticationRedis(
     val key: String,
     val value: String
-)
+) {
+    fun match(req: String): Boolean = this.value == req
+}

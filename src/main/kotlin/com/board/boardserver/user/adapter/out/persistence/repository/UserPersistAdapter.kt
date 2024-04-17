@@ -4,7 +4,6 @@ import com.board.boardserver.common.exception.CommonException
 import com.board.boardserver.common.exception.enum.CommonExceptionCode
 import com.board.boardserver.role.adapter.out.persistence.entity.RoleType
 import com.board.boardserver.role.adapter.out.persistence.repository.RoleRepository
-import com.board.boardserver.role.domain.Role
 import com.board.boardserver.user.adapter.out.persistence.mapper.UserJpaEntityMapper
 import com.board.boardserver.user.adapter.out.persistence.mapper.UserRoleJpaEntityMapper
 import com.board.boardserver.user.port.`in`.command.UserCommend
@@ -30,7 +29,7 @@ class UserPersistAdapter(
         return UserJpaEntityMapper.instance.toUser(userRepository.save(user))
     }
 
-    override fun saveUser(commend: UserCommend.Request): User {
+    override fun saveUser(commend: UserCommend.Create): User {
         val userJpaEntity = userRepository.save(UserJpaEntityMapper.instance.toJpaEntity(commend))
         return UserJpaEntityMapper.instance.toUser(userJpaEntity)
     }

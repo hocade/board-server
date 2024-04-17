@@ -23,13 +23,13 @@ abstract class UserJpaEntityMapper {
 
 
     @Mapping(target = "roles", source = ".", qualifiedByName = ["initRoles"])
-    abstract fun toJpaEntity(commend: UserCommend.Request): UserJpaEntity
+    abstract fun toJpaEntity(commend: UserCommend.Create): UserJpaEntity
 
     @Mapping(target = "roles", source = "roles", qualifiedByName = ["userRoles"])
     abstract fun toUser(userJpaEntity: UserJpaEntity): User
 
     @Named("initRoles")
-    fun initRoles(commend: UserCommend.Request): MutableSet<UserRoleJpaEntity> {
+    fun initRoles(commend: UserCommend.Create): MutableSet<UserRoleJpaEntity> {
         return mutableSetOf()
     }
 

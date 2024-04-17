@@ -3,7 +3,6 @@ package com.board.boardserver.common.config
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.http.HttpMethod
-import org.springframework.security.config.Customizer
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
@@ -18,7 +17,7 @@ import org.springframework.security.web.SecurityFilterChain
 @Configuration
 @EnableWebSecurity
 class SecurityConfig {
-    private val allowedUrls = arrayOf("/user")
+    private val allowedUrls = arrayOf("/guest/**")
 
     @Bean
     @Throws(Exception::class)
@@ -28,6 +27,7 @@ class SecurityConfig {
             .headers { it.frameOptions().sameOrigin() }
             .authorizeHttpRequests {
                 it.requestMatchers(*allowedUrls).permitAll()
+                it.requestMatchers(HttpMethod.POST, "/user").permitAll()
                   .anyRequest().hasRole("USER")
             }
             .oauth2ResourceServer {
