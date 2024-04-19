@@ -8,12 +8,7 @@ import com.board.boardserver.user.adapter.`in`.rest.mapper.UserResponseDtoMapper
 import com.board.boardserver.user.port.`in`.mapper.UserCommandMapper
 import com.board.boardserver.user.port.`in`.usecase.UserUseCase
 import org.springframework.http.ResponseEntity
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.PathVariable
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.RequestBody
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.*
 
 /**
  * @author jinwook.kim
@@ -25,6 +20,13 @@ class UserController(
     private val userUseCase: UserUseCase
 ) {
 
+    @PostMapping
+    fun create(@RequestBody dto: UserDto.Create): ResponseEntity<GenericResponse<UserDto.Response>> {
+        val command = UserCommandMapper.instance.toRequestCommand(dto)
+        val user = userUseCase.create(command)
+        return GenericResponse.ok(UserResponseDtoMapper.instance.toDto(user))
+    }
+
     @GetMapping(value = ["/{id}"])
     fun read(@PathVariable id: Long): ResponseEntity<GenericResponse<UserDto.Response>> {
         val user = userUseCase.findById(id)
@@ -34,10 +36,10 @@ class UserController(
         throw CommonException(CommonExceptionCode.USER_NOT_FOUND)
     }
 
-    @PostMapping
-    fun create(@RequestBody dto: UserDto.Create): ResponseEntity<GenericResponse<UserDto.Response>> {
-        val command = UserCommandMapper.instance.toRequestCommand(dto)
-        val user = userUseCase.create(command)
-        return GenericResponse.ok(UserResponseDtoMapper.instance.toDto(user))
+    @GetMapping(value = ["/exists"])
+    fun exist(email: String): ResponseEntity<GenericResponse<Boolean>> {
+        val result = userUseCase.findByEmail(email)
+        return GenericResponse.ok(result != null)
     }
+
 }

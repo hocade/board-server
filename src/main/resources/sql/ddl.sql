@@ -30,3 +30,14 @@ create table USER_ROLES
         foreign key (USER_ID) references USER (ID)
 );
 
+
+create table TERMS
+(
+    ID               bigint(11) auto_increment,
+    TYPE             varchar(50) null,
+    FILE_ID          bigint(11)  null,
+    CREATED_DATETIME datetime    null,
+    UPDATED_DATETIME datetime    null,
+    constraint TERMS_pk
+        primary key (ID)
+);

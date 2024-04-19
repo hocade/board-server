@@ -17,7 +17,7 @@ import org.springframework.security.web.SecurityFilterChain
 @Configuration
 @EnableWebSecurity
 class SecurityConfig {
-    private val allowedUrls = arrayOf("/guest/**")
+    private val allowedUrls = arrayOf("/guest/**", "/user/exists")
 
     @Bean
     @Throws(Exception::class)

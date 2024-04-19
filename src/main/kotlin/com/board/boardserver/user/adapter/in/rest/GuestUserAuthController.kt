@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*
  * @since 4/17/24
  */
 @RestController
-@RequestMapping(value = [EndpointPrefix.guest + EndpointPrefix.user])
+@RequestMapping(value = [EndpointPrefix.guest + EndpointPrefix.user + "/auth"])
 class GuestUserAuthController(
     private val guestUserAuthUseCase: GuestUserAuthUseCase
 ) {
@@ -22,7 +22,7 @@ class GuestUserAuthController(
     /**
      * 사용자 본인 인증 코드 발급
      */
-    @PostMapping(value = ["/auth"])
+    @PostMapping
     fun auth(@RequestBody @Validated dto: UserAuthDto.Request): ResponseEntity<GenericResponse<UserAuthDto.Response>> {
         return GenericResponse.ok(guestUserAuthUseCase.auth(dto))
     }
@@ -30,7 +30,7 @@ class GuestUserAuthController(
     /**
      * 사용자 본인 인증 확인
      */
-    @PutMapping(value = ["/auth"])
+    @PutMapping
     fun auth(@RequestBody dto: UserAuthCodeDto): ResponseEntity<GenericResponse<Boolean>> {
         return GenericResponse.ok(guestUserAuthUseCase.check(dto))
     }
