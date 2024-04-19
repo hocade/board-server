@@ -41,3 +41,17 @@ create table TERMS
     constraint TERMS_pk
         primary key (ID)
 );
+
+create table ATTACHMENT
+(
+    ID                 bigint(11) auto_increment,
+    EXT                varchar(50)  null,
+    UPLOAD_FILE_NAME   varchar(100) null,
+    ORIGINAL_FILE_NAME varchar(100) null,
+    RESOURCE_URL       varchar(200) null,
+    FULL_PATH          varchar(50)  null,
+    CREATED_DATETIME   datetime     null,
+    UPDATED_DATETIME   datetime     null,
+    constraint ATTACHMENT_pk
+        primary key (ID)
+);

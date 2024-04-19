@@ -38,6 +38,7 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-security")
     implementation("com.googlecode.libphonenumber:libphonenumber:8.12.6")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
+    implementation("com.amazonaws:aws-java-sdk-s3:1.12.174")
     implementation("com.querydsl:querydsl-jpa:${queryDslVersion}")
     implementation("org.mapstruct:mapstruct:${mapstructVersion}")
     implementation("org.mapstruct:mapstruct-processor:${mapstructVersion}")

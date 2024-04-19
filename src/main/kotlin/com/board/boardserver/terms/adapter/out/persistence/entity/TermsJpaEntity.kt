@@ -12,6 +12,7 @@ import jakarta.persistence.*
 class TermsJpaEntity(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "ID")
     var id: Long? = null,
 
     @Enumerated(EnumType.STRING)

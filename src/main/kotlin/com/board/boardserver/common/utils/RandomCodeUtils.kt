@@ -8,7 +8,7 @@ import java.util.*
  */
 object RandomCodeUtils {
 
-    fun uuid() = UUID.randomUUID().toString()
+    fun uuid() = UUID.randomUUID().toString().replace("-", "")
     // 랜덤 6자리 숫자 발급
     fun sixNumberCode() = (0..999999).random().toString().padStart(999999.toString().length, '0')
 

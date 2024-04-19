@@ -12,6 +12,7 @@ import jakarta.persistence.*
 class UserJpaEntity(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "ID")
     var id: Long? = null,
 
     @Column(name = "EMAIL")

@@ -11,6 +11,7 @@ import jakarta.persistence.*
 class RoleJpaEntity(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "ID")
     var id: Long? = null,
 
     @Column(name = "NAME")
