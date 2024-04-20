@@ -2,7 +2,7 @@ package com.board.boardserver.user.port.`in`.mapper
 
 import com.board.boardserver.role.adapter.out.persistence.entity.RoleType
 import com.board.boardserver.user.adapter.`in`.rest.dto.UserDto
-import com.board.boardserver.user.port.`in`.command.UserCommend
+import com.board.boardserver.user.port.`in`.command.UserCommand
 import org.mapstruct.Mapper
 import org.mapstruct.Mapping
 import org.mapstruct.Named
@@ -19,7 +19,7 @@ abstract class UserCommandMapper {
     }
 
     @Mapping(target = "roleType", source = ".", qualifiedByName = ["userRole"])
-    abstract fun toRequestCommand(dto: UserDto.Create): UserCommend.Create
+    abstract fun toRequestCommand(dto: UserDto.Create): UserCommand.Create
 
     /**
      * USER 기본 권한

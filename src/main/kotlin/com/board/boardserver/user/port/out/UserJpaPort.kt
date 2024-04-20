@@ -1,8 +1,8 @@
 package com.board.boardserver.user.port.out
 
 import com.board.boardserver.role.adapter.out.persistence.entity.RoleType
-import com.board.boardserver.user.port.`in`.command.UserCommend
 import com.board.boardserver.user.domain.User
+import com.board.boardserver.user.port.`in`.command.UserCommand
 
 /**
  * @author jinwook.kim
@@ -10,7 +10,7 @@ import com.board.boardserver.user.domain.User
  */
 interface UserJpaPort {
     fun updateRole(id: Long, roleType: RoleType): User
-    fun saveUser(commend: UserCommend.Create): User
+    fun saveUser(command: UserCommand.Create): User
     fun findById(id: Long): User?
     fun findByEmail(email: String): User?
 }

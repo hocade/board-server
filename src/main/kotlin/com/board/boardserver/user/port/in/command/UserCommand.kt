@@ -6,13 +6,13 @@ import com.board.boardserver.role.adapter.out.persistence.entity.RoleType
  * @author jinwook.kim
  * @since 3/23/24
  */
-sealed class UserCommend {
+sealed class UserCommand {
     data class Create(
         val nickName: String,
         var password: String,
         val email: String,
         val roleType: RoleType
-    ) : UserCommend() {
+    ) : UserCommand() {
         fun encryptPassword(encryptedPassword: String) {
             this.password = encryptedPassword
         }

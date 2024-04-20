@@ -6,9 +6,9 @@ import com.board.boardserver.role.adapter.out.persistence.entity.RoleType
 import com.board.boardserver.role.adapter.out.persistence.repository.RoleRepository
 import com.board.boardserver.user.adapter.out.persistence.mapper.UserJpaEntityMapper
 import com.board.boardserver.user.adapter.out.persistence.mapper.UserRoleJpaEntityMapper
-import com.board.boardserver.user.port.`in`.command.UserCommend
-import com.board.boardserver.user.port.out.UserJpaPort
 import com.board.boardserver.user.domain.User
+import com.board.boardserver.user.port.`in`.command.UserCommand
+import com.board.boardserver.user.port.out.UserJpaPort
 import org.springframework.stereotype.Component
 
 /**
@@ -29,8 +29,8 @@ class UserPersistAdapter(
         return UserJpaEntityMapper.instance.toUser(userRepository.save(user))
     }
 
-    override fun saveUser(commend: UserCommend.Create): User {
-        val userJpaEntity = userRepository.save(UserJpaEntityMapper.instance.toJpaEntity(commend))
+    override fun saveUser(command: UserCommand.Create): User {
+        val userJpaEntity = userRepository.save(UserJpaEntityMapper.instance.toJpaEntity(command))
         return UserJpaEntityMapper.instance.toUser(userJpaEntity)
     }
 

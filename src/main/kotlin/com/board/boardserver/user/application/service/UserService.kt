@@ -3,7 +3,7 @@ package com.board.boardserver.user.application.service
 import com.board.boardserver.common.exception.CommonException
 import com.board.boardserver.common.exception.enum.CommonExceptionCode
 import com.board.boardserver.user.domain.User
-import com.board.boardserver.user.port.`in`.command.UserCommend
+import com.board.boardserver.user.port.`in`.command.UserCommand
 import com.board.boardserver.user.port.`in`.usecase.UserUseCase
 import com.board.boardserver.user.port.out.UserJpaPort
 import jakarta.transaction.Transactional
@@ -21,13 +21,13 @@ class UserService(
 ) : UserUseCase {
 
     @Transactional
-    override fun create(commend: UserCommend.Create): User {
-        if (findByEmail(commend.email) != null) {
+    override fun create(command: UserCommand.Create): User {
+        if (findByEmail(command.email) != null) {
             throw CommonException(CommonExceptionCode.USER_ALREADY_EXISTS)
         }
-        commend.encryptPassword(passwordEncoder.encode(commend.password))
-        val user = userJpaPort.saveUser(commend)
-        return userJpaPort.updateRole(user.id!!, commend.roleType)
+        command.encryptPassword(passwordEncoder.encode(command.password))
+        val user = userJpaPort.saveUser(command)
+        return userJpaPort.updateRole(user.id!!, command.roleType)
     }
 
     override fun findById(id: Long): User? {
