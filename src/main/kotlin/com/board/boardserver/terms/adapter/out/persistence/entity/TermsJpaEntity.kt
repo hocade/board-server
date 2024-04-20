@@ -19,9 +19,11 @@ class TermsJpaEntity(
     @Column(name = "TYPE")
     var type: TermsType,
 
-    // todo : 파일 entity and CRUD
     @Column(name = "FILE_ID")
-    var file: Long
+    var file: Long,
+
+    @Column(name = "ORDINAL")
+    var ordinal: Long
 
 ) : BaseJpaEntity() {
 }

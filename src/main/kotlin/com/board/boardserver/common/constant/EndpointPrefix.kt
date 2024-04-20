@@ -6,6 +6,7 @@ package com.board.boardserver.common.constant
  */
 class EndpointPrefix {
     companion object {
+        const val admin = "/admin"
         const val guest = "/guest"
         const val user = "/user"
     }

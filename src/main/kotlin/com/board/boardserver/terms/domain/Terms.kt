@@ -1,5 +1,6 @@
 package com.board.boardserver.terms.domain
 
+import com.board.boardserver.attachment.domain.Attachment
 import com.board.boardserver.terms.adapter.out.persistence.entity.TermsType
 
 /**
@@ -9,7 +10,6 @@ import com.board.boardserver.terms.adapter.out.persistence.entity.TermsType
 data class Terms(
     val id: Long?,
     val type: TermsType,
-    val file: Long,
-    val createdAt: Long,
-    val modifiedAt: Long
+    val attachment: Attachment,
+    val ordinal: Long
 )

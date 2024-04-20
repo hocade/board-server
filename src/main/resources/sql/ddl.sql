@@ -38,6 +38,7 @@ create table TERMS
     FILE_ID          bigint(11)  null,
     CREATED_DATETIME datetime    null,
     UPDATED_DATETIME datetime    null,
+    ORDINAL          bigint(11)  null,
     constraint TERMS_pk
         primary key (ID)
 );

@@ -28,6 +28,7 @@ class SecurityConfig {
             .authorizeHttpRequests {
                 it.requestMatchers(*allowedUrls).permitAll()
                 it.requestMatchers(HttpMethod.POST, "/user").permitAll()
+                it.requestMatchers("/admin/**").hasRole("ADMIN")
                   .anyRequest().hasRole("USER")
             }
             .oauth2ResourceServer {
