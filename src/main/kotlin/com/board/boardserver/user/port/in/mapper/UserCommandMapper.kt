@@ -21,6 +21,10 @@ abstract class UserCommandMapper {
     @Mapping(target = "roleType", source = ".", qualifiedByName = ["userRole"])
     abstract fun toRequestCommand(dto: UserDto.Create): UserCommand.Create
 
+    @Mapping(target = "id", source = "id")
+    @Mapping(target = "password", source = "dto.password")
+    abstract fun toUpdateCommand(id: Long, dto: UserDto.Update): UserCommand.Update
+
     /**
      * USER 기본 권한
      */

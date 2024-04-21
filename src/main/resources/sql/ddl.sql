@@ -9,8 +9,11 @@ create table USER
     PHONE_NATIONAL_NUMBER varchar(50)  null,
     UNIQUE_CODE           varchar(50)  null,
     CREATED_DATETIME      datetime     null,
-    UPDATED_DATETIME      datetime     null
+    UPDATED_DATETIME      datetime     null,
+    STATUS                varchar(50)  null,
+    PROFILE_ID            bigint       null
 );
+
 
 create table ROLE
 (

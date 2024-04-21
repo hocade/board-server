@@ -17,4 +17,8 @@ sealed class UserCommand {
             this.password = encryptedPassword
         }
     }
+    data class Update(
+        var id: Long,
+        var password: String?,
+    ) : UserCommand()
 }

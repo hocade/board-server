@@ -1,6 +1,7 @@
 package com.board.boardserver.user.adapter.`in`.rest.dto
 
 import com.board.boardserver.role.adapter.out.persistence.entity.RoleType
+import com.board.boardserver.user.adapter.out.persistence.entity.UserStatus
 
 /**
  * @author jinwook.kim
@@ -13,9 +14,13 @@ sealed class UserDto {
         val email: String,
         val roleType: RoleType?
     ) : UserDto()
+    data class Update(
+        val password: String?
+    ) : UserDto()
     data class Response(
         val id: Long,
         val nickName: String,
-        val email: String
+        val email: String,
+        val status: UserStatus
     ) : UserDto()
 }

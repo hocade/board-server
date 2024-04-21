@@ -17,6 +17,7 @@ abstract class AttachmentJpaEntityMapper {
     }
 
     abstract fun toJpaEntity(domain: Attachment): AttachmentJpaEntity
+
     abstract fun toDomain(entity: AttachmentJpaEntity): Attachment
 
     @Mapping(target = "id", ignore = true)

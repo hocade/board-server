@@ -11,6 +11,7 @@ enum class CommonExceptionCode(
     val code: Int,
     val message: String
 ) {
+    ACCESS_DENIED(HttpStatus.UNAUTHORIZED, 401, "access denied"),
     NOT_FOUND_RESOURCE(HttpStatus.BAD_REQUEST, 1000, "not found resource"),
     USER_NOT_FOUND(HttpStatus.BAD_REQUEST, 1001, "not found user"),
     CLIENT_NOT_FOUND(HttpStatus.BAD_REQUEST, 1002, "not found client"),

@@ -2,8 +2,8 @@ package com.board.boardserver.user.adapter.out.persistence.mapper
 
 import com.board.boardserver.role.adapter.out.persistence.entity.RoleJpaEntity
 import com.board.boardserver.user.adapter.out.persistence.entity.UserJpaEntity
-import com.board.boardserver.user.adapter.out.persistence.entity.UserRoleJpaEntityId
 import com.board.boardserver.user.adapter.out.persistence.entity.UserRoleJpaEntity
+import com.board.boardserver.user.adapter.out.persistence.entity.UserRoleJpaEntityId
 import com.board.boardserver.user.domain.UserRole
 import org.mapstruct.AfterMapping
 import org.mapstruct.Mapper
@@ -26,6 +26,11 @@ abstract class UserRoleJpaEntityMapper {
     @Mapping(target = "role", source = "role")
     abstract fun toJpaEntity(user: UserJpaEntity, role: RoleJpaEntity): UserRoleJpaEntity
 
+    @Mapping(target = "id", ignore = true)
+    @Mapping(target = "user", ignore = true)
+    @Mapping(target = "role", ignore = true)
+    abstract fun toJpaEntity(userRole: UserRole): UserRoleJpaEntity
+
     @Mapping(target = "userId", source = "id.userId")
     @Mapping(target = "roleId", source = "id.roleId")
     abstract fun toUserRole(id: UserRoleJpaEntityId): UserRole
@@ -33,6 +38,11 @@ abstract class UserRoleJpaEntityMapper {
     @AfterMapping
     fun after(user: UserJpaEntity, role: RoleJpaEntity, @MappingTarget entity: UserRoleJpaEntity) {
         entity.id = UserRoleJpaEntityId(user.id!!, role.id!!)
+    }
+
+    @AfterMapping
+    fun after(userRole: UserRole, @MappingTarget entity: UserRoleJpaEntity) {
+        entity.id = UserRoleJpaEntityId(userRole.userId, userRole.roleId)
     }
 
 }

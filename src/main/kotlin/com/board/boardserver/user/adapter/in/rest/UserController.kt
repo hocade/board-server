@@ -9,6 +9,7 @@ import com.board.boardserver.user.port.`in`.mapper.UserCommandMapper
 import com.board.boardserver.user.port.`in`.usecase.UserUseCase
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
+import org.springframework.web.multipart.MultipartFile
 
 /**
  * @author jinwook.kim
@@ -34,6 +35,21 @@ class UserController(
             return GenericResponse.ok(UserResponseDtoMapper.instance.toDto(it))
         }
         throw CommonException(CommonExceptionCode.USER_NOT_FOUND)
+    }
+
+    @PutMapping(value = ["/{id}"])
+    fun update(@PathVariable id: Long,
+               @RequestBody dto: UserDto.Update): ResponseEntity<GenericResponse<UserDto.Response>> {
+        val command = UserCommandMapper.instance.toUpdateCommand(id, dto)
+        val user = userUseCase.update(command)
+        return GenericResponse.ok(UserResponseDtoMapper.instance.toDto(user))
+    }
+
+    @PutMapping(value = ["/{id}/profile"])
+    fun updateProfile(@PathVariable id: Long,
+               @RequestPart file: MultipartFile): ResponseEntity<GenericResponse<UserDto.Response>> {
+        val user = userUseCase.updateProfile(id, file)
+        return GenericResponse.ok(UserResponseDtoMapper.instance.toDto(user))
     }
 
     @GetMapping(value = ["/exists"])

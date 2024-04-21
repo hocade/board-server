@@ -10,7 +10,8 @@ import com.board.boardserver.user.port.`in`.command.UserCommand
  */
 interface UserJpaPort {
     fun updateRole(id: Long, roleType: RoleType): User
-    fun saveUser(command: UserCommand.Create): User
+    fun createUser(command: UserCommand.Create): User
+    fun save(user: User): User
     fun findById(id: Long): User?
     fun findByEmail(email: String): User?
 }

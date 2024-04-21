@@ -29,8 +29,13 @@ class UserPersistAdapter(
         return UserJpaEntityMapper.instance.toUser(userRepository.save(user))
     }
 
-    override fun saveUser(command: UserCommand.Create): User {
+    override fun createUser(command: UserCommand.Create): User {
         val userJpaEntity = userRepository.save(UserJpaEntityMapper.instance.toJpaEntity(command))
+        return UserJpaEntityMapper.instance.toUser(userJpaEntity)
+    }
+
+    override fun save(user: User): User {
+        val userJpaEntity = userRepository.save(UserJpaEntityMapper.instance.toJpaEntity(user));
         return UserJpaEntityMapper.instance.toUser(userJpaEntity)
     }
 

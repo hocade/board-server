@@ -24,6 +24,13 @@ class UserJpaEntity(
     @Column(name = "PASSWORD")
     var password: String,
 
+    @Enumerated(EnumType.STRING)
+    @Column(name = "STATUS")
+    var status: UserStatus = UserStatus.ACTIVATION,
+
+    @Column(name = "PROFILE_ID")
+    var profile: Long?,
+
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "user", cascade = [CascadeType.ALL], orphanRemoval = true)
     var roles: MutableSet<UserRoleJpaEntity> = mutableSetOf(),
 
