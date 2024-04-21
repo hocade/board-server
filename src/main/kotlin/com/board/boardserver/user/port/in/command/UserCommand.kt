@@ -1,6 +1,7 @@
 package com.board.boardserver.user.port.`in`.command
 
 import com.board.boardserver.role.adapter.out.persistence.entity.RoleType
+import com.board.boardserver.user.domain.Phone
 
 /**
  * @author jinwook.kim
@@ -11,7 +12,8 @@ sealed class UserCommand {
         val nickName: String,
         var password: String,
         val email: String,
-        val roleType: RoleType
+        val roleType: RoleType,
+        val phone: Phone
     ) : UserCommand() {
         fun encryptPassword(encryptedPassword: String) {
             this.password = encryptedPassword

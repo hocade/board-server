@@ -1,7 +1,6 @@
 package com.board.boardserver.user.adapter.`in`.rest.dto
 
 import com.board.boardserver.user.adapter.out.persistence.entity.UserAuthenticationType
-import jakarta.validation.constraints.NotBlank
 
 /**
  * @author jinwook.kim
@@ -10,8 +9,7 @@ import jakarta.validation.constraints.NotBlank
  */
 sealed class UserAuthDto {
     data class Request(
-        @field:NotBlank
-        val target: String, // 휴대폰 번호, 이메일 등
+        val phone: PhoneDto,
         val type: UserAuthenticationType
     ) : UserAuthDto()
     data class Response(

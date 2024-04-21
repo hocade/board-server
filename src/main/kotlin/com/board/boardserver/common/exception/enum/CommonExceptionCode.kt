@@ -15,5 +15,7 @@ enum class CommonExceptionCode(
     NOT_FOUND_RESOURCE(HttpStatus.BAD_REQUEST, 1000, "not found resource"),
     USER_NOT_FOUND(HttpStatus.BAD_REQUEST, 1001, "not found user"),
     CLIENT_NOT_FOUND(HttpStatus.BAD_REQUEST, 1002, "not found client"),
-    USER_ALREADY_EXISTS(HttpStatus.BAD_REQUEST, 1003, "user already exists")
+    USER_ALREADY_EXISTS(HttpStatus.BAD_REQUEST, 1003, "user already exists"),
+    INVALID_PHONE_NUMBER(HttpStatus.BAD_REQUEST, 1004, "invalid phone number"),
+    INVALID_COUNTRY_CODE(HttpStatus.BAD_REQUEST, 1005, "invalid country code")
 }

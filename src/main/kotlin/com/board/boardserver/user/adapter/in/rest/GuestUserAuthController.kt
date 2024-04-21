@@ -4,9 +4,9 @@ import com.board.boardserver.common.constant.EndpointPrefix
 import com.board.boardserver.common.response.GenericResponse
 import com.board.boardserver.user.adapter.`in`.rest.dto.UserAuthCodeDto
 import com.board.boardserver.user.adapter.`in`.rest.dto.UserAuthDto
+import com.board.boardserver.user.port.`in`.mapper.UserAuthCommandMapper
 import com.board.boardserver.user.port.`in`.usecase.GuestUserAuthUseCase
 import org.springframework.http.ResponseEntity
-import org.springframework.validation.annotation.Validated
 import org.springframework.web.bind.annotation.*
 
 /**
@@ -23,8 +23,9 @@ class GuestUserAuthController(
      * 사용자 본인 인증 코드 발급
      */
     @PostMapping
-    fun auth(@RequestBody @Validated dto: UserAuthDto.Request): ResponseEntity<GenericResponse<UserAuthDto.Response>> {
-        return GenericResponse.ok(guestUserAuthUseCase.auth(dto))
+    fun auth(@RequestBody dto: UserAuthDto.Request): ResponseEntity<GenericResponse<UserAuthDto.Response>> {
+        val command = UserAuthCommandMapper.instance.toPhoneCommand(dto)
+        return GenericResponse.ok(guestUserAuthUseCase.auth(command))
     }
 
     /**
@@ -32,7 +33,8 @@ class GuestUserAuthController(
      */
     @PutMapping
     fun auth(@RequestBody dto: UserAuthCodeDto): ResponseEntity<GenericResponse<Boolean>> {
-        return GenericResponse.ok(guestUserAuthUseCase.check(dto))
+        val command = UserAuthCommandMapper.instance.toCodeCommand(dto)
+        return GenericResponse.ok(guestUserAuthUseCase.check(command))
     }
 
 }

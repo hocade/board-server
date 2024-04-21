@@ -6,6 +6,6 @@ package com.board.boardserver.user.domain
  * @since 4/15/24
  */
 data class Phone(
-    val countryCode: String?,
-    val nationalNumber: String?
+    val countryCode: String,
+    val nationalNumber: String
 )

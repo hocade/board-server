@@ -12,7 +12,8 @@ sealed class UserDto {
         val nickName: String,
         val password: String,
         val email: String,
-        val roleType: RoleType?
+        val roleType: RoleType?,
+        val phone: PhoneDto
     ) : UserDto()
     data class Update(
         val password: String?
