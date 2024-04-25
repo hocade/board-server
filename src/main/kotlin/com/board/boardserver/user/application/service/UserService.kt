@@ -8,6 +8,7 @@ import com.board.boardserver.user.domain.User
 import com.board.boardserver.user.port.`in`.command.UserCommand
 import com.board.boardserver.user.port.`in`.usecase.UserUseCase
 import com.board.boardserver.user.port.out.UserJpaPort
+import com.board.boardserver.user.port.out.UserTermsJpaPort
 import jakarta.transaction.Transactional
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
@@ -20,6 +21,7 @@ import org.springframework.web.multipart.MultipartFile
 @Service
 class UserService(
     private val userJpaPort: UserJpaPort,
+    private val userTermsJpaPort: UserTermsJpaPort,
     private val attachmentUseCase: AttachmentUseCase,
     private val passwordEncoder: PasswordEncoder
 ) : UserUseCase {
@@ -31,6 +33,7 @@ class UserService(
         }
         command.encryptPassword(passwordEncoder.encode(command.password))
         val user = userJpaPort.createUser(command)
+        command.terms.forEach { termsId -> userTermsJpaPort.create(user.id!!, termsId) }
         return userJpaPort.updateRole(user.id!!, command.roleType)
     }
 

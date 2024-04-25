@@ -13,7 +13,8 @@ sealed class UserDto {
         val password: String,
         val email: String,
         val roleType: RoleType?,
-        val phone: PhoneDto
+        val phone: PhoneDto,
+        val terms: List<Long>
     ) : UserDto()
     data class Update(
         val password: String?

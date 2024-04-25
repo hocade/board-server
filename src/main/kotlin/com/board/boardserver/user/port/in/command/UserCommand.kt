@@ -13,7 +13,8 @@ sealed class UserCommand {
         var password: String,
         val email: String,
         val roleType: RoleType,
-        val phone: Phone
+        val phone: Phone,
+        val terms: List<Long>
     ) : UserCommand() {
         fun encryptPassword(encryptedPassword: String) {
             this.password = encryptedPassword

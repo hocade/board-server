@@ -46,6 +46,17 @@ create table TERMS
         primary key (ID)
 );
 
+
+create table USER_TERMS
+(
+    USER_ID          bigint   not null,
+    TERMS_ID         bigint   not null,
+    CREATED_DATETIME datetime null,
+    UPDATED_DATETIME datetime null,
+    constraint USER_TERMS_pk
+        primary key (USER_ID, TERMS_ID)
+);
+
 create table ATTACHMENT
 (
     ID                 bigint(11) auto_increment,
