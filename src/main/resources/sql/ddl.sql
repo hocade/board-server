@@ -70,3 +70,18 @@ create table ATTACHMENT
     constraint ATTACHMENT_pk
         primary key (ID)
 );
+
+create table USER_OPTION
+(
+    ID               bigint auto_increment,
+    USER_ID          bigint       null,
+    PUSH_TOKEN       varchar(100) null,
+    LANGUAGE_CODE    varchar(50)  null,
+    NOTICE           tinyint default false,
+    CREATED_DATETIME datetime     null,
+    UPDATED_DATETIME datetime     null,
+    constraint USER_OPTION_pk
+        primary key (ID),
+    constraint USER_OPTION_USER_ID_fk
+        foreign key (USER_ID) references USER (ID)
+);
