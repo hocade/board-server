@@ -85,3 +85,19 @@ create table USER_OPTION
     constraint USER_OPTION_USER_ID_fk
         foreign key (USER_ID) references USER (ID)
 );
+
+create table FRIENDSHIP
+(
+    ID               bigint auto_increment,
+    USER_ID          bigint      null,
+    FRIEND_ID        bigint      null,
+    STATUS           varchar(50) null,
+    CREATED_DATETIME datetime    null,
+    UPDATED_DATETIME datetime    null,
+    constraint FRIENDSHIP_pk
+        primary key (ID),
+    constraint FRIENDSHIP_USER_ID_fk
+        foreign key (USER_ID) references USER (ID),
+    constraint FRIENDSHIP_USER_ID_fk_2
+        foreign key (FRIEND_ID) references USER (ID)
+);

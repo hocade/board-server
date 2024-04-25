@@ -9,7 +9,7 @@ import com.board.boardserver.user.port.`in`.command.UserCommand
  * @since 3/14/24
  */
 data class User(
-    val id: Long? = null,
+    val id: Long,
     val email: String,
     val nickName: String,
     var password: String,
