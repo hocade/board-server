@@ -1,6 +1,6 @@
 package com.board.boardserver.user.application.service
 
-import com.board.boardserver.attachment.application.service.AttachmentService
+import com.board.boardserver.attachment.port.`in`.usecase.AttachmentUseCase
 import com.board.boardserver.common.exception.CommonException
 import com.board.boardserver.common.exception.enum.CommonExceptionCode
 import com.board.boardserver.common.utils.AuthUtils
@@ -20,7 +20,7 @@ import org.springframework.web.multipart.MultipartFile
 @Service
 class UserService(
     private val userJpaPort: UserJpaPort,
-    private val attachmentService: AttachmentService,
+    private val attachmentUseCase: AttachmentUseCase,
     private val passwordEncoder: PasswordEncoder
 ) : UserUseCase {
 
@@ -34,6 +34,7 @@ class UserService(
         return userJpaPort.updateRole(user.id!!, command.roleType)
     }
 
+    @Transactional
     override fun update(command: UserCommand.Update): User {
         var user = findMyInfo(command.id)
         if (command.password != null && !passwordEncoder.matches(command.password, user.password)) {
@@ -43,9 +44,10 @@ class UserService(
         return userJpaPort.save(user)
     }
 
+    @Transactional
     override fun updateProfile(id: Long, file: MultipartFile): User {
         var user = findMyInfo(id)
-        val attachment = attachmentService.upload(file)
+        val attachment = attachmentUseCase.upload(file)
         user.updateProfile(attachment.id!!)
         return userJpaPort.save(user)
     }
