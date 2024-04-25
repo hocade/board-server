@@ -1,12 +1,41 @@
 server:
   port: 8080
+  servlet:
+    contextPath: /api
+jwt:
+  secretKey:
+  expirationHours: 3
+
+aws:
+  s3:
+    accessKey:
+    secretKey:
+    bucketName:
+    folderPath:
 
 spring:
+  servlet:
+    multipart:
+      enabled: true # 멀티파트 업로드 지원여부 (default: true)
+      file-size-threshold: 0B # 파일을 디스크에 저장하지 않고 메모리에 저장하는 최소 크기 (default: 0B)
+      location: /Users/emcast/workspace/hocade/attachment/tmp # 업로드된 파일이 임시로 저장되는 디스크 위치 (default: WAS가 결정)
+      max-file-size: 100MB # 한개 파일의 최대 사이즈 (default: 1MB)
+      max-request-size: 100MB # 한개 요청의 최대 사이즈 (default: 10MB)
+  redis:
+    port: 6379
+    host: localhost
+  security:
+    oauth2:
+      resource-server:
+        jwt:
+          issuer-uri: http://localhost:9000
+          jwk-set-uri: http://localhost:9000/oauth2/jwks
+
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url:
-    username:
-    password:
+    url: jdbc:mysql://localhost:3306/test?serverTimezone=UTC&characterEncoding=UTF-8&useSSL=false&allowPublicKeyRetrieval=true
+    username: root
+    password: 1234
 
   jpa:
     database-platform: org.hibernate.dialect.MySQL8Dialect
@@ -18,7 +47,9 @@ spring:
 
 logging:
   level:
-    root: DEBUG
+    root: INFO
+    com.board.boardserver: DEBUG
+    org.springframework.security: TRACE
     org:
       hibernate:
         SQL: DEBUG
