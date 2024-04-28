@@ -3,8 +3,11 @@ package com.board.boardserver.friendship.adapter.`in`.rest
 import com.board.boardserver.common.constant.EndpointPrefix
 import com.board.boardserver.common.response.GenericResponse
 import com.board.boardserver.friendship.adapter.`in`.rest.dto.FriendShipDto
+import com.board.boardserver.friendship.adapter.`in`.rest.mapper.FriendShipDtoMapper
 import com.board.boardserver.friendship.port.`in`.mapper.FriendShipCommandMapper
 import com.board.boardserver.friendship.port.`in`.usecase.FriendShipUsecase
+import org.springframework.data.domain.Page
+import org.springframework.data.domain.Pageable
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 
@@ -17,6 +20,16 @@ import org.springframework.web.bind.annotation.*
 class FriendShipController(
     private val friendShipUsecase: FriendShipUsecase
 ) {
+
+
+    /**
+     * 친구 목록 조회
+     */
+    @GetMapping
+    fun paging(pageable: Pageable): ResponseEntity<GenericResponse<Page<FriendShipDto.ResponsePaging>>> {
+        val page = friendShipUsecase.paging(pageable)
+        return GenericResponse.ok(page.map { FriendShipDtoMapper.instance.toResponsePagingDto(it) })
+    }
 
     /**
      * 친구 신청

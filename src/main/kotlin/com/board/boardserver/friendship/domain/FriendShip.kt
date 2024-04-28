@@ -1,5 +1,6 @@
 package com.board.boardserver.friendship.domain
 
+import com.board.boardserver.friendship.adapter.out.persistence.entity.FriendShipStatus
 import com.board.boardserver.user.domain.User
 
 /**
@@ -8,7 +9,8 @@ import com.board.boardserver.user.domain.User
  */
 data class FriendShip(
     val id: Long,
-    val user: User,
+    val status: FriendShipStatus,
+    val user: User?,
     val friend: User
 ) {
 }

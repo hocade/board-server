@@ -1,5 +1,6 @@
 package com.board.boardserver.user.adapter.`in`.rest.dto
 
+import com.board.boardserver.attachment.domain.Attachment
 import com.board.boardserver.role.adapter.out.persistence.entity.RoleType
 import com.board.boardserver.user.adapter.out.persistence.entity.UserStatus
 
@@ -23,6 +24,7 @@ sealed class UserDto {
         val id: Long,
         val nickName: String,
         val email: String,
-        val status: UserStatus
+        val status: UserStatus,
+        val profile: Attachment?
     ) : UserDto()
 }

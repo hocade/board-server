@@ -3,6 +3,7 @@ package com.board.boardserver.friendship.adapter.`in`.rest.dto
 import com.board.boardserver.common.exception.CommonException
 import com.board.boardserver.common.exception.enum.CommonExceptionCode
 import com.board.boardserver.friendship.adapter.out.persistence.entity.FriendShipStatus
+import com.board.boardserver.user.adapter.`in`.rest.dto.UserDto
 
 /**
  * @author jinwook.kim
@@ -22,4 +23,9 @@ sealed class FriendShipDto {
             }
         }
     }
+    data class ResponsePaging(
+        val id: Long,
+        val status: FriendShipStatus,
+        val friend: UserDto.Response
+    ) : FriendShipDto()
 }

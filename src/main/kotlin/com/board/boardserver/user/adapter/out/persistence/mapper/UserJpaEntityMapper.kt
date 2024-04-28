@@ -48,7 +48,7 @@ abstract class UserJpaEntityMapper {
     @Mapping(target = "status", source = "userJpaEntity.status")
     @Mapping(target = "phone", source = "userJpaEntity.phone")
     @Mapping(target = "uniqueCode", source = "userJpaEntity.uniqueCode")
-    abstract fun toUser(userJpaEntity: UserJpaEntity, profile: AttachmentJpaEntity): User
+    abstract fun toUser(userJpaEntity: UserJpaEntity, profile: AttachmentJpaEntity?): User
 
     @Named("phone")
     fun phone(phone: Phone): PhoneJpaEntity {

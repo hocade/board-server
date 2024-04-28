@@ -4,10 +4,14 @@ import com.board.boardserver.common.exception.CommonException
 import com.board.boardserver.common.exception.enum.CommonExceptionCode
 import com.board.boardserver.friendship.adapter.out.persistence.entity.FriendShipStatus
 import com.board.boardserver.friendship.adapter.out.persistence.mapper.FriendShipJpaEntityMapper
+import com.board.boardserver.friendship.domain.FriendShip
+import com.board.boardserver.friendship.domain.mapper.FriendShipMapper
 import com.board.boardserver.friendship.port.`in`.command.FriendShipCommand
 import com.board.boardserver.friendship.port.out.FriendShipJpaPort
 import com.board.boardserver.user.adapter.out.persistence.entity.UserJpaEntity
 import com.board.boardserver.user.adapter.out.persistence.repository.UserRepository
+import org.springframework.data.domain.Page
+import org.springframework.data.domain.Pageable
 import org.springframework.stereotype.Component
 
 /**
@@ -19,6 +23,11 @@ class FriendShipPersistAdapter(
     private val friendShipRepository: FriendShipRepository,
     private val userRepository: UserRepository
 ) : FriendShipJpaPort {
+    override fun paging(userId: Long, pageable: Pageable): Page<FriendShip> {
+        val vo = friendShipRepository.paging(userId, pageable)
+        return vo.map { FriendShipMapper.instance.toDomain(it.friendShip, it.friend, it.profile) }
+    }
+
     override fun request(userId: Long, command: FriendShipCommand.Request): Boolean {
         val user = findUser(userId)
         val target = findUser(command.friendId)
