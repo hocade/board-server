@@ -16,4 +16,6 @@ abstract class PhoneJpaEntityMapper {
     }
 
     abstract fun toJpaEntity(phone: Phone): PhoneJpaEntity
+
+    abstract fun toDomain(phoneJpaEntity: PhoneJpaEntity): Phone
 }

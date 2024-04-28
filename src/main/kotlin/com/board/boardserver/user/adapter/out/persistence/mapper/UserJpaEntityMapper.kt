@@ -1,5 +1,6 @@
 package com.board.boardserver.user.adapter.out.persistence.mapper
 
+import com.board.boardserver.attachment.adapter.out.persistence.entity.AttachmentJpaEntity
 import com.board.boardserver.common.exception.CommonException
 import com.board.boardserver.common.exception.enum.CommonExceptionCode
 import com.board.boardserver.common.utils.PhoneUtils
@@ -32,10 +33,22 @@ abstract class UserJpaEntityMapper {
     abstract fun toJpaEntity(command: UserCommand.Create): UserJpaEntity
 
     @Mapping(target = "roles", source = "roles", qualifiedByName = ["userRoleJpaEntities"])
+    @Mapping(target = "profile", source = "profile.id")
     abstract fun toJpaEntity(user: User): UserJpaEntity
 
     @Mapping(target = "roles", source = "roles", qualifiedByName = ["userRoles"])
+    @Mapping(target = "profile", ignore = true)
     abstract fun toUser(userJpaEntity: UserJpaEntity): User
+
+    @Mapping(target = "roles", source = "userJpaEntity.roles", qualifiedByName = ["userRoles"])
+    @Mapping(target = "profile", source = "profile")
+    @Mapping(target = "id", source = "userJpaEntity.id")
+    @Mapping(target = "email", source = "userJpaEntity.email")
+    @Mapping(target = "nickName", source = "userJpaEntity.nickName")
+    @Mapping(target = "status", source = "userJpaEntity.status")
+    @Mapping(target = "phone", source = "userJpaEntity.phone")
+    @Mapping(target = "uniqueCode", source = "userJpaEntity.uniqueCode")
+    abstract fun toUser(userJpaEntity: UserJpaEntity, profile: AttachmentJpaEntity): User
 
     @Named("phone")
     fun phone(phone: Phone): PhoneJpaEntity {

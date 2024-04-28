@@ -58,7 +58,7 @@ class UserService(
     override fun updateProfile(id: Long, file: MultipartFile): User {
         var user = findMyInfo(id)
         val attachment = attachmentUseCase.upload(file)
-        user.updateProfile(attachment.id!!)
+        user.updateProfile(attachment)
         return userJpaPort.save(user)
     }
 

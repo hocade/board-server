@@ -1,5 +1,6 @@
 package com.board.boardserver.user.domain
 
+import com.board.boardserver.attachment.domain.Attachment
 import com.board.boardserver.user.adapter.out.persistence.entity.UserStatus
 import com.board.boardserver.user.port.`in`.command.UserCommand
 
@@ -14,7 +15,7 @@ data class User(
     val nickName: String,
     var password: String,
     var status: UserStatus,
-    var profile: Long?,
+    var profile: Attachment?,
     var roles: MutableSet<UserRole> = mutableSetOf(),
     val phone: Phone?,
     val uniqueCode: String?
@@ -22,7 +23,7 @@ data class User(
     fun update(command: UserCommand.Update) {
         this.password = command.password ?: this.password
     }
-    fun updateProfile(profile: Long) {
+    fun updateProfile(profile: Attachment) {
         this.profile = profile
     }
     fun checkPassword(encryptedPassword: String): Boolean {
