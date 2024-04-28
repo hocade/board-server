@@ -7,6 +7,7 @@ import jakarta.persistence.*
 /**
  * @author jinwook.kim
  * @since 4/25/24
+ * 본인, 친구 row 각각 생성
  */
 @Entity
 @Table(name = "FRIENDSHIP")
@@ -28,4 +29,24 @@ class FriendShipJpaEntity(
     @Column(name = "STATUS")
     var status: FriendShipStatus
 ) : BaseJpaEntity() {
+
+    fun hasRejected(): Boolean {
+        return FriendShipStatus.REJECT == this.status
+    }
+
+    fun isActive(): Boolean {
+        return FriendShipStatus.ACTIVE == this.status
+    }
+
+    fun hasRequested(): Boolean {
+        return FriendShipStatus.REQUEST == this.status
+    }
+
+    fun isWaiting(): Boolean {
+        return FriendShipStatus.WAITING == this.status
+    }
+
+    fun updateStatus(status: FriendShipStatus) {
+        this.status = status
+    }
 }

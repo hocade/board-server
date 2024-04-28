@@ -8,4 +8,6 @@ import com.board.boardserver.friendship.port.`in`.command.FriendShipCommand
  */
 interface FriendShipUsecase {
     fun request(command: FriendShipCommand.Request): Boolean
+    fun update(command: FriendShipCommand.Update): Boolean
+    fun delete(command: FriendShipCommand.Request): Boolean
 }

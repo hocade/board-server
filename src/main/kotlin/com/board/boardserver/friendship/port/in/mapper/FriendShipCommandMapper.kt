@@ -16,4 +16,6 @@ abstract class FriendShipCommandMapper {
     }
 
     abstract fun toRequest(dto: FriendShipDto.Request): FriendShipCommand.Request
+
+    abstract fun toUpdate(dto: FriendShipDto.Update): FriendShipCommand.Update
 }

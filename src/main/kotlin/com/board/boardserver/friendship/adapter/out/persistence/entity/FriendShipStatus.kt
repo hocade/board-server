@@ -8,5 +8,12 @@ enum class FriendShipStatus {
     REQUEST,
     WAITING,
     REJECT,
-    ACTIVE
+    REMOVE,
+    ACTIVE;
+
+    companion object {
+        fun requestValue(): List<FriendShipStatus> {
+            return listOf(REJECT, ACTIVE)
+        }
+    }
 }

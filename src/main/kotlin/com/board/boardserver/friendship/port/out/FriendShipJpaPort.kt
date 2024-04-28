@@ -8,4 +8,6 @@ import com.board.boardserver.friendship.port.`in`.command.FriendShipCommand
  */
 interface FriendShipJpaPort {
     fun request(userId: Long, command: FriendShipCommand.Request): Boolean
+    fun update(userId: Long, command: FriendShipCommand.Update): Boolean
+    fun delete(userId: Long, command: FriendShipCommand.Request): Boolean
 }
