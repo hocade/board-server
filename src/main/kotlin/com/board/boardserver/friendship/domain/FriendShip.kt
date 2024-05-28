@@ -9,8 +9,25 @@ import com.board.boardserver.user.domain.User
  */
 data class FriendShip(
     val id: Long,
-    val status: FriendShipStatus,
+    var status: FriendShipStatus,
     val user: User?,
-    val friend: User
+    val friend: User?
 ) {
+
+    fun isActive(): Boolean {
+        return FriendShipStatus.ACTIVE == this.status
+    }
+
+    fun hasRequested(): Boolean {
+        return FriendShipStatus.REQUEST == this.status
+    }
+
+    fun isWaiting(): Boolean {
+        return FriendShipStatus.WAITING == this.status
+    }
+
+    fun updateStatus(status: FriendShipStatus) {
+        this.status = status
+    }
+
 }

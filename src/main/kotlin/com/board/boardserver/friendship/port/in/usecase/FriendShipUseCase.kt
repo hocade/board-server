@@ -9,9 +9,9 @@ import org.springframework.data.domain.Pageable
  * @author jinwook.kim
  * @since 4/25/24
  */
-interface FriendShipUsecase {
+interface FriendShipUseCase {
     fun paging(pageable: Pageable): Page<FriendShip>
     fun request(command: FriendShipCommand.Request): Boolean
     fun update(command: FriendShipCommand.Update): Boolean
-    fun delete(command: FriendShipCommand.Request): Boolean
+    fun delete(command: FriendShipCommand.Update): Boolean
 }

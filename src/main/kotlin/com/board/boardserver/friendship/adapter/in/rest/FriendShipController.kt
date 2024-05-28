@@ -4,8 +4,9 @@ import com.board.boardserver.common.constant.EndpointPrefix
 import com.board.boardserver.common.response.GenericResponse
 import com.board.boardserver.friendship.adapter.`in`.rest.dto.FriendShipDto
 import com.board.boardserver.friendship.adapter.`in`.rest.mapper.FriendShipDtoMapper
+import com.board.boardserver.friendship.adapter.out.persistence.entity.FriendShipStatus
 import com.board.boardserver.friendship.port.`in`.mapper.FriendShipCommandMapper
-import com.board.boardserver.friendship.port.`in`.usecase.FriendShipUsecase
+import com.board.boardserver.friendship.port.`in`.usecase.FriendShipUseCase
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
 import org.springframework.http.ResponseEntity
@@ -18,7 +19,7 @@ import org.springframework.web.bind.annotation.*
 @RestController
 @RequestMapping(value = [EndpointPrefix.user + "/friend"])
 class FriendShipController(
-    private val friendShipUsecase: FriendShipUsecase
+    private val friendShipUseCase: FriendShipUseCase
 ) {
 
 
@@ -27,7 +28,7 @@ class FriendShipController(
      */
     @GetMapping
     fun paging(pageable: Pageable): ResponseEntity<GenericResponse<Page<FriendShipDto.ResponsePaging>>> {
-        val page = friendShipUsecase.paging(pageable)
+        val page = friendShipUseCase.paging(pageable)
         return GenericResponse.ok(page.map { FriendShipDtoMapper.instance.toResponsePagingDto(it) })
     }
 
@@ -37,7 +38,7 @@ class FriendShipController(
     @PostMapping
     fun create(@RequestBody dto: FriendShipDto.Request): ResponseEntity<GenericResponse<Boolean>> {
         val command = FriendShipCommandMapper.instance.toRequest(dto)
-        return GenericResponse.ok(friendShipUsecase.request(command))
+        return GenericResponse.ok(friendShipUseCase.request(command))
     }
 
     /**
@@ -47,12 +48,15 @@ class FriendShipController(
     fun update(@RequestBody dto: FriendShipDto.Update): ResponseEntity<GenericResponse<Boolean>> {
         dto.validation()
         val command = FriendShipCommandMapper.instance.toUpdate(dto)
-        return GenericResponse.ok(friendShipUsecase.update(command))
+        return GenericResponse.ok(friendShipUseCase.update(command))
     }
 
+    /**
+     * 친구 삭제
+     */
     @DeleteMapping
     fun delete(@RequestBody dto: FriendShipDto.Request): ResponseEntity<GenericResponse<Boolean>> {
-        val command = FriendShipCommandMapper.instance.toRequest(dto)
-        return GenericResponse.ok(friendShipUsecase.delete(command))
+        val command = FriendShipCommandMapper.instance.toUpdate(FriendShipDto.Update(dto.friendId, FriendShipStatus.REMOVE))
+        return GenericResponse.ok(friendShipUseCase.delete(command))
     }
 }

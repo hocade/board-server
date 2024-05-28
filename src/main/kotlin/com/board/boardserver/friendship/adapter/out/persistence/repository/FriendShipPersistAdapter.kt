@@ -28,59 +28,26 @@ class FriendShipPersistAdapter(
         return vo.map { FriendShipMapper.instance.toDomain(it.friendShip, it.friend, it.profile) }
     }
 
+    override fun findByUserIdAndFriendId(userId: Long, friendId: Long): FriendShip? {
+        friendShipRepository.findByUserIdAndFriendId(userId, friendId)?.let {
+                return FriendShipMapper.instance.toDomain(it)
+            }
+        return null
+    }
+
     override fun request(userId: Long, command: FriendShipCommand.Request): Boolean {
         val user = findUser(userId)
         val target = findUser(command.friendId)
-
-        val myFriendShipOpt = friendShipRepository.findByUserAndFriend(user, target)
-        val targetFriendShipOpt = friendShipRepository.findByUserAndFriend(target, user)
-
-        if (myFriendShipOpt.isPresent && targetFriendShipOpt.isPresent) {
-            val myFriendShip = myFriendShipOpt.get()
-            val targetFriendShip = targetFriendShipOpt.get()
-            // 이미 친구로 등록 되어 있을 때 || 상대방이 이미 친구 신청을 한 상태
-            if ((myFriendShip.isActive() && targetFriendShip.isActive()) || myFriendShip.isWaiting()) {
-                throw CommonException(CommonExceptionCode.INVALID_REQUEST)
-            }
-            // 거절 한 이력 이후 재신청
-            if (!myFriendShip.hasRequested()) {
-                myFriendShip.updateStatus(FriendShipStatus.REQUEST)
-                targetFriendShip.updateStatus(FriendShipStatus.WAITING)
-                friendShipRepository.saveAll(listOf(myFriendShip, targetFriendShip))
-            }
-            return true
-        }
-
         // 새로운 친구 신청
         friendShipRepository.save(FriendShipJpaEntityMapper.instance.toJpaEntity(user, target, FriendShipStatus.REQUEST))
         friendShipRepository.save(FriendShipJpaEntityMapper.instance.toJpaEntity(target, user, FriendShipStatus.WAITING))
         return true
     }
 
-    override fun update(userId: Long, command: FriendShipCommand.Update): Boolean {
-        val user = findUser(userId)
-        val target = findUser(command.friendId)
-        // 나와 상대방의 친구 entity 조회
-        val myFriendship = friendShipRepository.findByUserAndFriendAndStatus(user, target, FriendShipStatus.WAITING).orElseThrow { CommonException(CommonExceptionCode.INVALID_REQUEST) }
-        val targetFriendship = friendShipRepository.findByUserAndFriendAndStatus(target, user, FriendShipStatus.REQUEST).orElseThrow { CommonException(CommonExceptionCode.INVALID_REQUEST) }
-        // 친구 상태 업데이트
-        myFriendship.updateStatus(command.status)
-        targetFriendship.updateStatus(command.status)
-        friendShipRepository.saveAll(listOf(myFriendship, targetFriendship))
-        // todo : 상태 변경에 대한 이력이 필요하다면 이력 테이블 생성, 현재는 필요하지 않음
-        return true
-    }
-
-    override fun delete(userId: Long, command: FriendShipCommand.Request): Boolean {
-        val user = findUser(userId)
-        val target = findUser(command.friendId)
-        // 나와 상대방의 친구 entity 조회
-        val myFriendship = friendShipRepository.findByUserAndFriendAndStatus(user, target, FriendShipStatus.ACTIVE).orElseThrow { CommonException(CommonExceptionCode.INVALID_REQUEST) }
-        val targetFriendship = friendShipRepository.findByUserAndFriendAndStatus(target, user, FriendShipStatus.ACTIVE).orElseThrow { CommonException(CommonExceptionCode.INVALID_REQUEST) }
-        // 친구 상태 업데이트
-        myFriendship.updateStatus(FriendShipStatus.REMOVE)
-        targetFriendship.updateStatus(FriendShipStatus.REMOVE)
-        friendShipRepository.saveAll(listOf(myFriendship, targetFriendship))
+    override fun update(friendShip: FriendShip): Boolean {
+        val friendShipJpaEntity = friendShipRepository.findById(friendShip.id).orElseThrow { CommonException(CommonExceptionCode.INVALID_REQUEST) }
+        friendShipJpaEntity.updateStatus(friendShip.status)
+        friendShipRepository.save(friendShipJpaEntity)
         return true
     }
 

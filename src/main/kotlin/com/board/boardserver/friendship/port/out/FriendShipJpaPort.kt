@@ -11,7 +11,7 @@ import org.springframework.data.domain.Pageable
  */
 interface FriendShipJpaPort {
     fun paging(userId: Long, pageable: Pageable): Page<FriendShip>
+    fun findByUserIdAndFriendId(userId: Long, friendId: Long): FriendShip?
     fun request(userId: Long, command: FriendShipCommand.Request): Boolean
-    fun update(userId: Long, command: FriendShipCommand.Update): Boolean
-    fun delete(userId: Long, command: FriendShipCommand.Request): Boolean
+    fun update(friendShip: FriendShip): Boolean
 }

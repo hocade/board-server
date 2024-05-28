@@ -29,6 +29,10 @@ abstract class FriendShipMapper {
     @Mapping(target = "friend", source = ".", qualifiedByName = ["friend"])
     abstract fun toDomain(friendShip: FriendShipJpaEntity, @Context friend: UserJpaEntity, @Context profile: AttachmentJpaEntity?): FriendShip
 
+    @Mapping(target = "user", ignore = true)
+    @Mapping(target = "friend", ignore = true)
+    abstract fun toDomain(friendShip: FriendShipJpaEntity): FriendShip
+
     @Named("friend")
     fun friend(friendShip: FriendShipJpaEntity, @Context friend: UserJpaEntity, @Context profile: AttachmentJpaEntity?): User {
         return UserJpaEntityMapper.instance.toUser(friend, profile)

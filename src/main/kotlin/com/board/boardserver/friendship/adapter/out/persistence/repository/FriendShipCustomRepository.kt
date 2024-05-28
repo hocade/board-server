@@ -13,5 +13,4 @@ import org.springframework.data.domain.Pageable
 interface FriendShipCustomRepository {
     fun paging(userId: Long, pageable: Pageable): Page<FriendShipPagingVo>
     fun existsByRequest(userId: Long, friendId: Long): Boolean
-    fun fetch(userId: Long, friendId: Long): FriendShipUpdateVo
 }

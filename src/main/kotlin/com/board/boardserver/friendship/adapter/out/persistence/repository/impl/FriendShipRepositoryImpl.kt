@@ -53,14 +53,4 @@ class FriendShipRepositoryImpl(
             return query.fetchFirst() != null
     }
 
-    override fun fetch(userId: Long, friendId: Long): FriendShipUpdateVo {
-        val subFriendShip = QFriendShipJpaEntity("sub")
-        return from(FRIENDSHIP)
-            .where(FRIENDSHIP.user.id.eq(userId).and(FRIENDSHIP.friend.id.eq(friendId)))
-            .select(Projections.constructor(FriendShipUpdateVo::class.java,
-                FRIENDSHIP,
-                JPAExpressions.selectFrom(subFriendShip).where(subFriendShip.user.id.eq(friendId).and(subFriendShip.friend.id.eq(userId)))
-            )).fetchFirst()
-    }
-
 }
