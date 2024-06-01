@@ -16,7 +16,7 @@ import org.springframework.web.multipart.MultipartFile
  * @since 2/22/24
  */
 @RestController
-@RequestMapping(value = ["/user"])
+@RequestMapping(value = ["/api/user"])
 class UserController(
     private val userUseCase: UserUseCase
 ) {
