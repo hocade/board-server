@@ -8,11 +8,11 @@ import com.board.boardserver.invite.domain.Invite
  */
 interface InviteJpaPort {
 
-    fun findByUserId(userId: Long): Invite?
+    fun findByUserId(userId: Long): Invite
 
-    fun findByCode(code: String): Invite?
+    fun findByCode(code: String): Invite
 
-    fun create(userId: Long): Invite?
+    fun create(userId: Long): Invite
 
-    fun update(userId: Long): Invite?
+    fun update(invite: Invite): Invite
 }

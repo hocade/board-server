@@ -12,6 +12,9 @@ data class Invite(
     var code: String
 ){
     fun refreshCode() {
-        this.code = "";
+        val digits = (1..9).toList()
+        this.code = (1..6)
+            .map { digits.random() }
+            .joinToString("")
     }
 }

@@ -18,5 +18,6 @@ enum class CommonExceptionCode(
     USER_ALREADY_EXISTS(HttpStatus.BAD_REQUEST, 1003, "user already exists"),
     INVALID_PHONE_NUMBER(HttpStatus.BAD_REQUEST, 1004, "invalid phone number"),
     INVALID_COUNTRY_CODE(HttpStatus.BAD_REQUEST, 1005, "invalid country code"),
-    ALREADY_REQUESTED(HttpStatus.BAD_REQUEST, 1006, "already requested")
+    ALREADY_REQUESTED(HttpStatus.BAD_REQUEST, 1006, "already requested"),
+    INVITE_ALREADY_EXISTS(HttpStatus.BAD_REQUEST, 1007, "invite code already exists");
 }

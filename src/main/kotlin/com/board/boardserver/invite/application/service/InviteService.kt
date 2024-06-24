@@ -1,5 +1,7 @@
 package com.board.boardserver.invite.application.service
 
+import com.board.boardserver.common.exception.CommonException
+import com.board.boardserver.common.exception.enum.CommonExceptionCode
 import com.board.boardserver.invite.application.port.command.InviteCommand
 import com.board.boardserver.invite.domain.Invite
 import com.board.boardserver.invite.port.`in`.usecase.InviteUseCase
@@ -16,16 +18,26 @@ class InviteService (
     private val inviteJpaPort: InviteJpaPort
 ) : InviteUseCase {
     @Transactional
-    override fun findByUserId(userId: Long): Invite {
-        TODO("Not yet implemented")
+    override fun findByUserId(userId: Long): Invite? {
+        inviteJpaPort.findByUserId(userId)?.let {
+            return it
+        }
+        return null;
     }
 
     override fun create(command: InviteCommand.Create): Invite {
-        TODO("Not yet implemented")
+        findByUserId(command.userId)?.let {
+            throw CommonException(CommonExceptionCode.INVITE_ALREADY_EXISTS)
+        }
+        return inviteJpaPort.create(command.userId)
     }
 
     override fun update(command: InviteCommand.Update): Invite {
-        TODO("Not yet implemented")
+        findByUserId(command.userId)?.let {
+            it.refreshCode()
+            return inviteJpaPort.update(it)
+        }
+        throw CommonException(CommonExceptionCode.INVITE_ALREADY_EXISTS)
     }
 
     override fun request(command: InviteCommand.Request): Boolean {

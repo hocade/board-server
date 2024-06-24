@@ -24,7 +24,4 @@ class InviteJpaEntity(
     var code: String? = null
 ) {
 
-    fun refreshCode() {
-        this.code = "";
-    }
 }

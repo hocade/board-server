@@ -1,5 +1,7 @@
 package com.board.boardserver.invite.adapter.in.rest;
 
+import com.board.boardserver.common.constant.EndpointPrefix
+import com.board.boardserver.common.response.GenericResponse
 import com.board.boardserver.friendship.adapter.`in`.rest.dto.FriendShipDto
 import com.board.boardserver.friendship.adapter.`in`.rest.mapper.FriendShipDtoMapper
 import com.board.boardserver.friendship.adapter.in.rest.dto.FriendShipDto;
