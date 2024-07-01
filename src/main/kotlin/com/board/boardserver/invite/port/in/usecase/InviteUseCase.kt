@@ -1,6 +1,6 @@
 package com.board.boardserver.invite.port.`in`.usecase
 
-import com.board.boardserver.invite.application.port.command.InviteCommand
+import com.board.boardserver.invite.application.port.`in`.command.InviteCommand
 import com.board.boardserver.invite.domain.Invite
 
 /**

@@ -1,6 +1,6 @@
 package com.board.boardserver.invite.adapter.`in`.rest.mapper
 
-import com.board.boardserver.invite.adapter.rest.dto.InviteDto
+import com.board.boardserver.invite.adapter.`in`.rest.dto.InviteDto
 import com.board.boardserver.invite.domain.Invite
 import com.board.boardserver.user.adapter.`in`.rest.mapper.UserResponseDtoMapper
 import org.mapstruct.Mapper

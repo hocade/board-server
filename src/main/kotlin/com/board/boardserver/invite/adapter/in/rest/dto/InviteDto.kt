@@ -1,4 +1,4 @@
-package com.board.boardserver.invite.adapter.in.rest.dto;
+package com.board.boardserver.invite.adapter.`in`.rest.dto;
 
 import com.board.boardserver.user.adapter.`in`.rest.dto.UserDto
 

@@ -2,7 +2,7 @@ package com.board.boardserver.invite.application.service
 
 import com.board.boardserver.common.exception.CommonException
 import com.board.boardserver.common.exception.enum.CommonExceptionCode
-import com.board.boardserver.invite.application.port.command.InviteCommand
+import com.board.boardserver.invite.application.port.`in`.command.InviteCommand
 import com.board.boardserver.invite.domain.Invite
 import com.board.boardserver.invite.port.`in`.usecase.InviteUseCase
 import com.board.boardserver.invite.port.out.InviteJpaPort
@@ -41,7 +41,10 @@ class InviteService (
     }
 
     override fun request(command: InviteCommand.Request): Boolean {
-        TODO("Not yet implemented")
+        inviteJpaPort.findByCode(command.code)?.let {
+            // 코인 업데이트
+        }
+        throw CommonException(CommonExceptionCode.INVALID_REQUEST)
     }
 
 }

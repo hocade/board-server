@@ -18,7 +18,7 @@ abstract class InviteJpaEntityMapper {
     }
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "user", source = "user")
-    @Mapping(target = "code", qualifiedByName = ["generateRandomCode"])
+    @Mapping(target = "code", ignore = true, qualifiedByName = ["generateRandomCode"])
     abstract fun toJpaEntity(user: UserJpaEntity): InviteJpaEntity
 
     abstract fun toJpaEntity(invite: Invite): InviteJpaEntity

@@ -1,7 +1,7 @@
 package com.board.boardserver.invite.port.`in`.mapper
 
-import com.board.boardserver.invite.adapter.rest.dto.InviteDto
-import com.board.boardserver.invite.application.port.command.InviteCommand
+import com.board.boardserver.invite.adapter.`in`.rest.dto.InviteDto
+import com.board.boardserver.invite.application.port.`in`.command.InviteCommand
 import org.mapstruct.Mapper
 import org.mapstruct.factory.Mappers
 

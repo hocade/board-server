@@ -1,4 +1,4 @@
-package com.board.boardserver.invite.application.port.in.command;
+package com.board.boardserver.invite.application.port.`in`.command;
 
 /**
  * @author gihyung.lee
